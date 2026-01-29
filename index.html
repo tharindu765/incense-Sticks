@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Premium artisanal incense sticks crafted from natural resins. Experience 90-minute meditative burns with our luxury wellness collection.">
+  <title>Aura Incense | Premium Artisanal Incense for Mindful Living</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Smoke Wisps Background (kept for other sections) -->
+  <div class="smoke-wisp smoke-wisp--1" aria-hidden="true"></div>
+  <div class="smoke-wisp smoke-wisp--2" aria-hidden="true"></div>
+  <div class="smoke-wisp smoke-wisp--3" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="header__content">
+        <a href="#" class="logo">AURA</a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <ul class="nav__list">
+            <li><a href="#features" class="nav__link">Our Craft</a></li>
+            <li><a href="#testimonials" class="nav__link">Stories</a></li>
+            <li><a href="#cta" class="nav__link">Shop</a></li>
+            <li>
+              <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  style="display: none;">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section with Canvas Animation -->
+    <section class="hero-canvas-container" id="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-overlay">
+        <div class="container">
+          <div class="hero__content">
+            <span class="hero__tagline animate-fade-in-up">Artisanal Wellness</span>
+            <h1 class="hero__title animate-fade-in-up animate-delay-1">
+              Elevate Your
+              <span>Sacred Space</span>
+            </h1>
+            <p class="hero__description animate-fade-in-up animate-delay-2">
+              Hand-crafted incense sticks made from the world's finest natural resins.
+              Transform your meditation practice with fragrances that linger for up to 90 minutes.
+            </p>
+            <div class="hero__cta animate-fade-in-up animate-delay-3">
+              <a href="#cta" class="btn btn--primary">Explore Collection</a>
+              <a href="#features" class="btn btn--secondary">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="loading-indicator" id="hero-loader">
+        <div class="spinner"></div>
+        <span>Loading Ritual...</span>
+      </div>
+      <div class="scroll-instruction">
+        <span>Scroll to Ignite</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features section" id="features">
+      <div class="container">
+        <header class="features__header">
+          <span class="features__tagline">Why Choose Aura</span>
+          <h2 class="features__title">Crafted for Conscious Living</h2>
+          <p class="features__subtitle">Every stick tells a story of tradition, purity, and purposeful creation.</p>
+        </header>
+
+        <div class="features__grid">
+          <!-- Feature 1: Natural Resins -->
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z">
+                </path>
+              </svg>
+            </div>
+            <h3 class="feature-card__title">Natural Resins</h3>
+            <p class="feature-card__description">
+              Sourced from ancient forests and sacred groves. Our resins are harvested ethically,
+              preserving centuries-old traditions while supporting local communities.
+            </p>
+          </article>
+
+          <!-- Feature 2: 90-Minute Burn -->
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <h3 class="feature-card__title">90-Minute Burn</h3>
+            <p class="feature-card__description">
+              Extended burn time means deeper immersion. Each stick is precision-crafted
+              to release its aromatic compounds slowly and consistently.
+            </p>
+          </article>
+
+          <!-- Feature 3: Meditation Boost -->
+          <article class="feature-card">
+            <div class="feature-card__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                <path d="M12 2v2"></path>
+              </svg>
+            </div>
+            <h3 class="feature-card__title">Meditation Boost</h3>
+            <p class="feature-card__description">
+              Scientifically formulated blends designed to enhance focus, calm the mind,
+              and create the perfect atmosphere for mindfulness practices.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials section section--dark" id="testimonials">
+      <div class="container">
+        <header class="testimonials__header">
+          <span class="testimonials__tagline">Customer Stories</span>
+          <h2 class="testimonials__title">Moments of Transformation</h2>
+        </header>
+
+        <div class="testimonials__carousel" id="testimonialCarousel">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card" data-testimonial="0">
+            <blockquote class="testimonial-card__quote">
+              The sandalwood blend has completely transformed my morning meditation routine.
+              The scent is subtle yet profound—exactly what I've been searching for.
+            </blockquote>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">S</div>
+              <cite class="testimonial-card__name">Sarah Chen</cite>
+              <span class="testimonial-card__role">Yoga Instructor, Los Angeles</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 (hidden by default) -->
+          <div class="testimonial-card" data-testimonial="1" style="display: none;">
+            <blockquote class="testimonial-card__quote">
+              After trying countless brands, Aura is the only one that doesn't trigger my sensitivities.
+              Pure ingredients make all the difference.
+            </blockquote>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">M</div>
+              <cite class="testimonial-card__name">Marcus Rivera</cite>
+              <span class="testimonial-card__role">Holistic Therapist, Austin</span>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 (hidden by default) -->
+          <div class="testimonial-card" data-testimonial="2" style="display: none;">
+            <blockquote class="testimonial-card__quote">
+              The 90-minute burn time is perfect for my deep work sessions.
+              It's become an essential part of my creative ritual.
+            </blockquote>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar" aria-hidden="true">E</div>
+              <cite class="testimonial-card__name">Elena Kowalski</cite>
+              <span class="testimonial-card__role">Author & Artist, Brooklyn</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Dots -->
+        <div class="testimonials__dots" role="tablist" aria-label="Testimonial navigation">
+          <button class="testimonials__dot testimonials__dot--active" data-index="0" role="tab" aria-selected="true"
+            aria-label="Testimonial 1"></button>
+          <button class="testimonials__dot" data-index="1" role="tab" aria-selected="false"
+            aria-label="Testimonial 2"></button>
+          <button class="testimonials__dot" data-index="2" role="tab" aria-selected="false"
+            aria-label="Testimonial 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta section" id="cta">
+      <div class="container">
+        <div class="cta__content">
+          <h2 class="cta__title">Begin Your Sensory Journey</h2>
+          <p class="cta__description">
+            Join thousands who have discovered the art of mindful fragrance.
+            Subscribe for exclusive blends and early access to new collections.
+          </p>
+          <div class="cta__buttons">
+            <a href="#" class="btn btn--light">Shop Now</a>
+            <a href="#" class="btn btn--secondary"
+              style="border-color: rgba(245,245,245,0.3); color: var(--cream-smoke);">Join Waitlist</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__content">
+        <div class="footer__brand">
+          <div class="footer__logo">AURA</div>
+          <p class="footer__tagline">
+            Premium artisanal incense crafted for those who seek
+            intentional living and mindful moments.
+          </p>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <div class="footer__nav-group">
+            <h4>Shop</h4>
+            <ul>
+              <li><a href="#">All Products</a></li>
+              <li><a href="#">Best Sellers</a></li>
+              <li><a href="#">Gift Sets</a></li>
+              <li><a href="#">Accessories</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__nav-group">
+            <h4>About</h4>
+            <ul>
+              <li><a href="#">Our Story</a></li>
+              <li><a href="#">Sustainability</a></li>
+              <li><a href="#">Journal</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__nav-group">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Privacy</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 Aura Incense. All rights reserved.</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Pinterest">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 12a4 4 0 1 0 8 0c0-2.5-2-4-4-4s-4 1.5-4 4z"></path>
+              <path d="M9 18l1-6"></path>
+              <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+              </path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
