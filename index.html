@@ -29,6 +29,26 @@
   <div class="smoke-wisp smoke-wisp--2" aria-hidden="true"></div>
   <div class="smoke-wisp smoke-wisp--3" aria-hidden="true"></div>
 
+  <!-- Theme Toggle (Moved to body for global access) -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+    <svg class="theme-icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <svg class="theme-icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+
   <!-- Header -->
   <header class="header" id="header">
     <div class="container">
@@ -36,28 +56,11 @@
         <!-- Logo -->
         <a href="#home" class="logo">AURA</a>
 
-        <!-- Navigation (Sidebar on Mobile) -->
-        <nav class="nav" aria-label="Main navigation">
-          <!-- Toggle (Inside Nav for Sidebar layout, positioned via CSS) -->
-          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-            <svg class="theme-icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
-            <svg class="theme-icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </button>
+        <!-- Mobile Header CTA (Shop Incense) -->
+        <a href="#shop" class="btn btn--cta-header">SHOP</a>
 
+        <!-- Desktop Nav (Hidden on Mobile) -->
+        <nav class="nav" aria-label="Main navigation">
           <ul class="nav__list">
             <li><a href="#home" class="nav__link active">Home</a></li>
             <li><a href="#about" class="nav__link">About</a></li>
@@ -77,8 +80,8 @@
   </header>
 
   <main>
-    <!-- Hero Section with Canvas Animation -->
-    <section class="hero-canvas-container" id="hero">
+    <!-- Hero Section (Home) -->
+    <section class="hero-canvas-container scroll-section" id="home">
       <canvas id="hero-canvas"></canvas>
       <div class="hero-overlay">
         <div class="container">
@@ -90,11 +93,9 @@
             </h1>
             <p class="hero__description animate-fade-in-up animate-delay-2">
               Hand-crafted incense sticks made from the world's finest natural resins.
-              Transform your meditation practice with fragrances that linger for up to 90 minutes.
             </p>
             <div class="hero__cta animate-fade-in-up animate-delay-3">
-              <a href="#cta" class="btn btn--primary">Explore Collection</a>
-              <a href="#features" class="btn btn--secondary">Learn More</a>
+              <a href="#shop" class="btn btn--cta-green btn--hero-full">SHOP INCENSE</a>
             </div>
           </div>
         </div>

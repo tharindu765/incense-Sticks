@@ -304,12 +304,13 @@
     window.addEventListener("resize", resizeCanvas);
 
     // GSAP Timeline triggered by scroll
+    // GSAP Timeline triggered by scroll
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: heroSection,
         start: "top top",
-        end: "+=3000", // Scroll distance of 3000px to play animation
-        scrub: 0.5, // Smooth scrubbing
+        end: "+=4200", // Increased by 40% (was 3000) for slower animation
+        scrub: 1.5, // Ultra-smooth scrubbing (was 0.5)
         pin: true, // Pin the hero section during animation
         anticipatePin: 1
       },
@@ -319,7 +320,7 @@
     // Animate the frame index
     tl.to(currentFrame, {
       index: frameCount - 1,
-      ease: "none",
+      ease: "power2.out", // Requested easing
       snap: "index", // Snap to integer frame index
       duration: 1
     });
