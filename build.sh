@@ -9,25 +9,11 @@ echo "🚀 Starting Production Build..."
 rm -rf dist
 mkdir -p dist/assets/images
 
-# 2. Convert Images to WebP
-echo "📸 Converting images to WebP (this may take a moment)..."
-# Using parallel if available would be faster, but simple loop is safer for dependencies
-count=0
-total=$(ls .agent/hero/animation-images/*.jpg | wc -l)
+# 2. Copy Assets
+echo "📸 Copying pre-converted WebP images..."
+cp -r assets/images/* dist/assets/images/
 
-for img in .agent/hero/animation-images/*.jpg; do
-  filename=$(basename "$img" .jpg)
-  # q:v 75 is a good balance for web
-  ffmpeg -i "$img" -c:v libwebp -q:v 75 "dist/assets/images/$filename.webp" -y -hide_banner -loglevel error
-  
-  count=$((count + 1))
-  # Progress bar logic
-  if (( count % 10 == 0 )); then
-    echo "   Progress: $count / $total images converted"
-  fi
-done
-
-echo "✅ Images optimized!"
+echo "✅ Images copied!"
 
 # 3. Minify CSS
 echo "🎨 Minifying CSS..."
