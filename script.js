@@ -219,6 +219,17 @@
       // Animate hamburger
       menuToggle.classList.toggle('menu-toggle--active');
     });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (nav.classList.contains('nav--open')) {
+          nav.classList.remove('nav--open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.classList.remove('menu-toggle--active');
+        }
+      });
+    });
   }
 
   // ========== GSAP HERO ANIMATION ==========

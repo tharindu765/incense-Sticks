@@ -127,8 +127,12 @@ footer,
 
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* Critical Mobile Fix */
+  width: 100%;
 }
 
 body {
@@ -138,6 +142,9 @@ body {
   color: var(--text-main);
   background-color: var(--bg-body);
   overflow-x: hidden;
+  /* Critical Mobile Fix */
+  width: 100%;
+  position: relative;
 }
 
 img,
@@ -180,7 +187,8 @@ h6 {
 }
 
 h1 {
-  font-size: var(--text-4xl);
+  font-size: clamp(2rem, 10vw, 3rem);
+  /* Mobile Fluid Typography */
   letter-spacing: -0.02em;
 }
 
@@ -402,6 +410,7 @@ p {
   right: 0;
   z-index: 1000;
   padding: var(--space-md) 0;
+  /* 16px vertical padding */
   background: transparent;
   transition: all var(--transition-base);
 }
@@ -414,7 +423,6 @@ p {
 
 [data-theme="dark"] .header--scrolled {
   background: rgba(25, 22, 11, 0.95);
-  /* Charcoal with opacity */
   border-bottom: 1px solid rgba(178, 107, 20, 0.1);
 }
 
@@ -422,133 +430,183 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-md);
+  /* Mobile: Logo Left, Hamburger Right */
+  height: 48px;
+  /* Ensure sufficient height for touch targets */
 }
 
+/* Logo */
 .logo {
   font-family: var(--font-heading);
   font-size: var(--text-xl);
   font-weight: 600;
   color: var(--text-main);
   letter-spacing: 0.1em;
-  flex: 1;
-  /* Pushes content */
+  z-index: 1002;
+  /* Ensure clickable above anything */
+  min-height: 48px;
+  display: flex;
+  align-items: center;
 }
 
-/* Nav is pushed to right or center */
-.nav {
-  display: none;
-  /* Mobile default */
-}
-
-/* Toggle Button Styling in Header */
+/* Toggle Logic: Desktop vs Mobile */
 .theme-toggle {
-  order: 2;
-  /* Mobile: Toggle on right? User said "Mobile: toggle left-aligned". */
-  /* Wait, user said "Mobile: toggle left-aligned, nav collapses" */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-main);
+  padding: 12px;
+  /* 48px touch target */
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
 }
 
-/* Desktop Styles */
+/* Desktop Styles (min-width: 768px) */
 @media (min-width: 768px) {
   .header__content {
     justify-content: flex-start;
   }
 
   .logo {
+    margin-right: var(--space-2xl);
     flex: 0 0 auto;
-    margin-right: var(--space-2xl);
-  }
-
-  /* Toggle centered between brand and nav */
-  .theme-toggle {
-    margin-right: var(--space-2xl);
-    order: 0;
   }
 
   .nav {
-    display: block;
+    display: flex !important;
+    align-items: center;
     flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    /* Nav text on right */
+    justify-content: space-between;
+    /* To separate Toggle and Links if desired, or grouped */
+    /* Requirement: "Toggle perfectly centered between brand and nav" */
+    /* Let's group toggle on left of nav, links on right */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    position: static;
+    height: auto;
+    width: auto;
+    background: transparent;
+    padding: 0;
   }
 
   .nav__list {
     display: flex;
     gap: var(--space-xl);
     align-items: center;
-  }
-}
-
-.nav__link {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  transition: color var(--transition-fast);
-  position: relative;
-}
-
-.nav__link.active {
-  color: var(--text-main);
-  font-weight: 600;
-}
-
-.nav__link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--text-main);
-}
-
-.nav__link:hover {
-  color: var(--text-main);
-}
-
-/* ========== MOBILE NAV ========== */
-@media (max-width: 767px) {
-  .header__content {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    /* Toggle - Logo - Hamburger? */
-    /* User: "Mobile: toggle left-aligned" */
+    margin-left: auto;
+    /* Push links to right */
   }
 
   .theme-toggle {
-    grid-column: 1;
+    /* Position relative to Nav container */
     margin-right: auto;
-  }
-
-  .logo {
-    grid-column: 2;
-    text-align: center;
+    /* Push to left side of Nav area (center of header) */
+    position: static;
   }
 
   .menu-toggle {
-    grid-column: 3;
-    color: var(--text-main);
+    display: none;
+    /* Hide hamburger on desktop */
+  }
+}
+
+/* Mobile Sidebar (max-width: 767px) */
+@media (max-width: 767px) {
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-body);
+    padding-top: 80px;
+    /* Space for theme toggle at top */
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+    transform: translateX(100%);
+    /* Hidden by default */
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 999;
+    /* Below header/hamburger z-index if hamburger is 1001 */
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
   }
 
-  .nav--open {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-body);
-    padding: var(--space-lg);
-    border-bottom: 1px solid var(--border-color);
+  .nav.nav--open {
+    transform: translateX(0);
   }
 
   .nav__list {
+    display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-    text-align: center;
+    gap: var(--space-lg);
+    align-items: flex-start;
+    /* Left align text in sidebar */
   }
+
+  /* Theme Toggle inside Sidebar: Absolute Top Right */
+  .theme-toggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    /* This places it inside the sidebar, top right corner */
+  }
+
+  /* Nav Links in Sidebar */
+  .nav__link {
+    font-size: var(--text-lg);
+    /* Larger text for mobile */
+    display: block;
+    padding: 12px 0;
+    /* Touch target vertical spacing */
+  }
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  /* 48px touch target */
+  min-width: 48px;
+  min-height: 48px;
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+  /* Above sidebar */
+  margin-right: -12px;
+  /* Pull right to align with container edge visually */
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+/* Hamburger Animation */
+.menu-toggle.menu-toggle--active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.menu-toggle--active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.menu-toggle--active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* ========== HERO SECTION (GSAP Canvas) ========== */
